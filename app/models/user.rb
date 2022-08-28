@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  # belongs_to :user_friend, class_name: 'User', foreign_key: 'user_id', optional: true
-  # has_many :friends, class_name: 'User', foreign_key: 'user_id'
+  has_many :liked_posts, class_name: 'Like', foreign_key: 'user_id'
+  has_many :posts
   has_and_belongs_to_many :friends,
                           class_name: 'User',
                           join_table: 'friendships',

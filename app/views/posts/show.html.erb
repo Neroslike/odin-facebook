@@ -1,1 +1,7 @@
-<p>It works too</p>
+<h1><%= @post.title %></h1>
+<br>
+<br>
+<p><%= @post.body %></p>
+<p>By: <%= @post.author.email %></p>
+<%= link_to 'Main page', posts_path %>
+<%= link_to 'Edit this post', edit_post_path %>
