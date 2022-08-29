@@ -1,0 +1,36 @@
+<div class="post">
+  <div class="post-title">
+    <h3><%= post.author.email %></h3>
+  </div>
+  <div class="post-body">
+    <p><%= post.body %></p>
+  </div>
+  <div class="post-attachment">
+    <% post.pictures.each do |picture| %>
+      <%= link_to image_tag(picture, class: 'post-picture'), post %>
+    <% end %>
+  </div>
+  <%= turbo_frame_tag post, class: 'post-frame' do %>
+    <div class="post-analytics">
+      <p>Likes: <%= post.likes.count %></p>
+      <p>Comments: 8</p>
+    </div>
+    <div class="post-resources">
+      <% if current_user.liked_posts.pluck(:post_id).include?(post.id) %>
+        <%= button_to like_path(post.likes.find_by(user_id: current_user.id)), method: :delete, class: 'liked like-button button' do %>
+          <i class="fa-solid fa-thumbs-up"></i> Like
+        <% end %>
+      <% else %>
+        <%= button_to likes_path(like: {post_id: post.id, user_id: current_user.id}), class: 'like-button button' do %>
+          <i class="fa-regular fa-thumbs-up like-icon"></i> Like
+        <% end %>
+      <% end %>
+      <%= button_to root_path, class: 'comment-button button' do %>
+        <i class="fa-solid fa-comment-dots"></i> Comment
+      <% end %>
+      <%= button_to root_path, class: 'share-button button' do %>
+        <i class="fa-solid fa-share"></i> Share
+      <% end %>
+    </div>
+  <% end %>
+</div>

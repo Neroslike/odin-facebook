@@ -1,7 +1,10 @@
+@use 'link';
+
 $primary-color: #64748b;
+$background-color: rgb(36, 37, 38);
 
 .navbar {
-  background-color: #0891b2;
+  background-color: $background-color;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   height: 50px;
   width: 100%;
@@ -11,4 +14,12 @@ $primary-color: #64748b;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  border-bottom: 1px solid gray;
+
+  a {
+    border-radius: 10px;
+    padding: 10px;
+  }
 }
+
+

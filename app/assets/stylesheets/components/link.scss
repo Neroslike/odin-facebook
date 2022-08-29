@@ -1,4 +1,4 @@
-$primary-color: #fafaf9;
+$primary-color: #d1d5db;
 
 .link {
   color: $primary-color;
@@ -9,5 +9,6 @@ $primary-color: #fafaf9;
 }
 
 .link:hover {
-  color: #dddddd;
+  color: #38bdf8;
+  background-color: rgba(37, 99, 235, 0.3);
 }
