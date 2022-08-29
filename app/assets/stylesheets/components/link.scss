@@ -1,0 +1,13 @@
+$primary-color: #fafaf9;
+
+.link {
+  color: $primary-color;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 600;
+  text-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;;
+}
+
+.link:hover {
+  color: #dddddd;
+}

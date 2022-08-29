@@ -6,16 +6,18 @@
   <h3><%= link_to p.title, p %></h3>
   <p><%= p.body %></p>
   <p>Author: <%= p.author.email %></p>
-  <p>Likes: <%= p.likes.count %></p>
-  <% if current_user.liked_posts.pluck(:post_id).include?(p.id) %>
-    <%= form_with url: like_path(p.likes.where(user_id: current_user.id).first.id), data: {turbo_method: :delete}, method: :delete do |f| %>
-      <%= f.submit 'Unlike' %>
-    <% end %>
-  <% else %>
-    <%= form_with url: likes_path, model: @like, data: {turbo_method: :post} do |f| %>
-      <%= f.hidden_field :user_id, value: current_user.id %>
-      <%= f.hidden_field :post_id, value: p.id %>
-      <%= f.submit 'Like' %>
+  <%= turbo_frame_tag p do %>
+    <p>Likes: <%= p.likes.count %></p>
+    <% if current_user.liked_posts.pluck(:post_id).include?(p.id) %>
+      <%= form_with url: like_path(p.likes.find_by(user_id: current_user.id).id), data: {turbo_method: :delete}, method: :delete do |f| %>
+        <%= f.submit 'Unlike' %>
+      <% end %>
+    <% else %>
+      <%= form_with url: likes_path, model: @like, data: {turbo_method: :post} do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :post_id, value: p.id %>
+        <%= f.submit 'Like' %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

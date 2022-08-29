@@ -74,3 +74,5 @@ end
 gem "devise", "~> 4.8"
 
 gem "cuprite", "~> 0.13"
+
+gem "cssbundling-rails", "~> 1.1"
