@@ -3,18 +3,5 @@
 <%= link_to 'New post', new_post_url %>
 
 <% @posts.each do |p| %>
-  <% if false %>
-    <h3><%= link_to p.title, p %></h3>
-    <p><%= p.body %></p>
-    <p>Author: <%= p.author.email %></p>
-    <%= turbo_frame_tag p do %>
-      <p>Likes: <%= p.likes.count %></p>
-      <% if current_user.liked_posts.pluck(:post_id).include?(p.id) %>
-        <%= button_to 'Like', like_path(p.likes.find_by(user_id: current_user.id)), method: :delete, class: 'liked' %>
-      <% else %>
-        <%= button_to 'Like', likes_path(like: {post_id: p.id, user_id: current_user.id}) %>
-      <% end %>
-    <% end %>
-  <% end %>
   <%= render 'post_show', post: p %>
 <% end %>
