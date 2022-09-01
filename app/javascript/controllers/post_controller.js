@@ -4,6 +4,6 @@ export default class extends Controller {
   static targets = ['showModal']
 
   show_modal() {
-    this.showModalTarget.classList.remove('modal')
+    this.showModalTarget.style.display = 'block'
   }
 }

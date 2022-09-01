@@ -1,4 +1,4 @@
-<div data-controller='post' class="post">
+<div class="post">
   <div class="post-title">
     <h3><%= post.author.email %></h3>
   </div>
@@ -7,7 +7,7 @@
   </div>
   <div class="post-attachment">
     <% post.pictures.each do |picture| %>
-      <%= link_to image_tag(picture, 'data-action': 'click->post#show_modal:prevent', class: 'post-picture modal-link'), post %>
+      <%= link_to image_tag(picture, class: 'post-picture modal-link'), post, data: { turbo_frame: 'modal' } %>
     <% end %>
   </div>
   <%= turbo_frame_tag post, class: 'post-frame' do %>
@@ -33,7 +33,4 @@
       <% end %>
     </div>
   <% end %>
-  <div data-post-target='showModal' class="modal">
-    <%= render 'post_modal', post: post %>
-  </div>
 </div>
