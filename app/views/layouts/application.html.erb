@@ -11,7 +11,7 @@
     <script src="https://kit.fontawesome.com/9384a12df6.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
+  <body data-controller='post'>
   <%= turbo_frame_tag "modal" %>
     <%= render 'components/navbar' %>
     <div class="main"><%= yield %></div>

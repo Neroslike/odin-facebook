@@ -2,6 +2,7 @@
 @use 'fonts';
 @use 'components/index' as components;
 @use 'post/index' as post;
+@use 'comments/index' as comments;
 
 $background-color: rgb(24, 25, 26);
 
@@ -16,4 +17,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.hidden {
+  display: none;
 }

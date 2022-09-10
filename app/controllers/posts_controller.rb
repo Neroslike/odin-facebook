@@ -43,9 +43,17 @@ class PostsController < ApplicationController
     redirect_to posts_path, status: :see_other
   end
 
+  def create_comment
+    @comment = Post.find(params[:id]).comments.create(comment_params)
+  end
+
   private
 
   def post_params
     params.require(:post).permit(:body, :user_id, :pictures)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:body, :user_id, :parent_id, :post_id)
   end
 end

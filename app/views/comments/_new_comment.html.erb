@@ -1,0 +1,7 @@
+<%= form_with url: create_comment_path, method: :post do |f| %>
+  <%= f.label 'comment[body]', class: 'hidden' %>
+  <%= f.text_area 'comment[body]', placeholder: 'Write a comment' %>
+  <%= f.hidden_field 'comment[user_id]', value: current_user.id %>
+  <%= f.hidden_field 'comment[post_id]', value: post.id %>
+  <%= f.submit %>
+<% end %>

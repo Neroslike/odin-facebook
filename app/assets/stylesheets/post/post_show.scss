@@ -95,7 +95,7 @@ $content-padding: 0 20px 0 20px;
 }
 
 .post-picture {
-  max-width: 100%;
+  width: 100%;
 }
 
 // Index post showing
@@ -106,6 +106,64 @@ $content-padding: 0 20px 0 20px;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
-  height: 100%;
+  color: white;
+  height: 100vh;
   margin-top: -20px;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 5% 95%;
+}
+
+.post-modal-attachment {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  justify-content: center;
+  align-items: center;
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.post-modal-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.post-modal-header {
+  background-color: #1e3a8a;
+  display: flex;
+  align-items: center;
+}
+
+.post-modal-back-link {
+  color: white;
+  margin-left: 15px;
+  font-size: 30px;
+}
+
+.post-modal-right {
+  display: grid;
+  grid-row: 1 / 3;
+  grid-template-rows: auto auto;
+  overflow: scroll;
+}
+
+.post-modal-description {
+  color: white;
+  padding: $content-padding;
+}
+
+.post-modal-bottom-right {
+  grid-column: 1 / 4;
+  grid-row: 5 / 6;
+  display: flex;
+  margin-bottom: 70px;
+}
+
+.comments-box {
+}
+
+.create-comment-box {
+  position: fixed;
+  bottom: 0px
 }

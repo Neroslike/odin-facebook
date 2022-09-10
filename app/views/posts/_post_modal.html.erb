@@ -1,3 +1,43 @@
 <div class='post-modal'>
-  
+  <div class='post-modal-header'>
+    <%= link_to root_path, class: 'post-modal-back-link', 'data-action': 'post#toggleScrolling' do%>
+      <i class="fa-solid fa-arrow-left-long"></i>
+    <% end %>
+  </div>
+  <div class="post-modal-attachment">
+    <%= image_tag post.pictures[0], class: 'post-modal-image' %>
+  </div>
+  <div class="post-modal-right">
+    <div class="post-modal-description">
+      <h3><%= post.author.email %></h3>
+      <p><%= post.body %></p>
+    </div>
+    <%= turbo_frame_tag post, class: 'post-frame' do %>
+      <div class="post-analytics">
+        <p>Likes: <%= post.likes.count %></p>
+        <p>Comments: 8</p>
+      </div>
+      <div class="post-resources">
+        <% if current_user.liked_posts.pluck(:post_id).include?(post.id) %>
+          <%= button_to like_path(post.likes.find_by(user_id: current_user.id)), method: :delete, class: 'liked like-button button' do %>
+            <i class="fa-solid fa-thumbs-up"></i> Like
+          <% end %>
+        <% else %>
+          <%= button_to likes_path(like: {post_id: post.id, user_id: current_user.id}), class: 'like-button button' do %>
+            <i class="fa-regular fa-thumbs-up like-icon"></i> Like
+          <% end %>
+        <% end %>
+        <%= button_to root_path, class: 'comment-button button' do %>
+          <i class="fa-solid fa-comment-dots"></i> Comment
+        <% end %>
+        <%= button_to root_path, class: 'share-button button' do %>
+          <i class="fa-solid fa-share"></i> Share
+        <% end %>
+      </div>
+    <% end %>
+    <div class='post-modal-bottom-right'>
+      <div class="comments-box"><%= render 'comments/post_comments', comments: post.comments.take(10) %></div>
+      <div class="create-comment-box"><%= render 'comments/new_comment', post: post %> </div>
+    </div>
+  </div>
 </div>
