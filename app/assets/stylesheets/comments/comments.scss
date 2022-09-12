@@ -7,6 +7,7 @@ $content-padding: 0 20px 0 20px;
   border-radius: 20px;
   height: fit-content;
   width: fit-content;
+  max-width: 80%;
   margin: 10px 20px 10px 20px;
 }
 
@@ -21,5 +22,25 @@ $content-padding: 0 20px 0 20px;
   margin: 0;
   margin-top: 2px;
   font-size: 16px;
+  overflow-wrap: break-word;
 }
 
+.new-message-box {
+  display: block;
+  width: 100%;
+
+  textarea {
+    flex: 1;
+    font-size: 14px;
+    width: 100%;
+    border: none;
+    overflow: auto;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    color: white;
+    resize: none; /*remove the resize handle on the bottom right*/
+    background-color: rgba($color: #000000, $alpha: 0);
+  }
+}

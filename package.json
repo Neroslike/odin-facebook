@@ -2,6 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "react-native-autogrow-textinput": "^5.4.0",
     "sass": "^1.54.5"
   },
   "scripts": {

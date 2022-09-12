@@ -12,7 +12,7 @@
       <h3><%= post.author.email %></h3>
       <p><%= post.body %></p>
     </div>
-    <%= turbo_frame_tag post, class: 'post-frame' do %>
+    <%= turbo_frame_tag post, class: 'post-frame modal-frame' do %>
       <div class="post-analytics">
         <p>Likes: <%= post.likes.count %></p>
         <p>Comments: 8</p>
@@ -35,9 +35,7 @@
         <% end %>
       </div>
     <% end %>
-    <div class='post-modal-bottom-right'>
-      <div class="comments-box"><%= render 'comments/post_comments', comments: post.comments.take(10) %></div>
-      <div class="create-comment-box"><%= render 'comments/new_comment', post: post %> </div>
-    </div>
+    <div class="comments-box"><%= render 'comments/post_comments', comments: post.comments %></div>
+    <div class="create-comment-box"><%= render 'comments/new_comment', post: post %> </div>
   </div>
 </div>
