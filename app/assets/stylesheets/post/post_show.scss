@@ -1,5 +1,6 @@
 // Index post showing 
 $background-color: rgb(36, 37, 38);
+$comments-background: rgb(27,27,27);
 $content-padding: 0 20px 0 20px;
 
 .post {
@@ -103,15 +104,13 @@ $content-padding: 0 20px 0 20px;
 // Modal post showing
 
 .post-modal {
-  position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
   width: 100%;
   color: white;
-  height: 95%;
-  margin-top: -20px;
+  height: calc(100vh - 51px);
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: 5% 95%;
+  grid-template-rows: 50px auto;
 }
 
 .post-modal-attachment {
@@ -146,9 +145,10 @@ $content-padding: 0 20px 0 20px;
   grid-row: 1 / 3;
   grid-column: 2 / 3;
   grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto auto;
-  overflow-y: scroll;
+  grid-template-rows: min-content min-content 1fr auto;
+  overflow-y: hidden;
   overflow-x: hidden;
+  background-color: rgb(8,8,8);
 }
 
 .post-modal-description {
@@ -168,14 +168,15 @@ $content-padding: 0 20px 0 20px;
   grid-column: 1 / 4;
   display: flex;
   flex-direction: column;
+  overflow-y: scroll;
 }
 
-.create-comment-box {
-  grid-row: 4 / 5;
+.post-comments {
+  grid-row: 5 / 6;
   grid-column: 1 / 4;
-  position: sticky;
-  bottom: 2px;
-  left: 0px;
-  display: block;
-  background-color: rgb(58, 59, 60)
+}
+
+.post-comments {
+  background-color: $comments-background;
+  padding: 10px;
 }

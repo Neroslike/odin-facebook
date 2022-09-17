@@ -8,7 +8,6 @@ $content-padding: 0 20px 0 20px;
   height: fit-content;
   width: fit-content;
   max-width: 80%;
-  margin: 10px 20px 10px 20px;
 }
 
 .comment-box-title {
@@ -25,22 +24,18 @@ $content-padding: 0 20px 0 20px;
   overflow-wrap: break-word;
 }
 
-.new-message-box {
-  display: block;
-  width: 100%;
+.comment-links {
+  display: flex;
+  margin: 5px 0px 0px 20px;
+  height: min-content;
 
-  textarea {
-    flex: 1;
-    font-size: 14px;
-    width: 100%;
-    border: none;
-    overflow: auto;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    color: white;
-    resize: none; /*remove the resize handle on the bottom right*/
-    background-color: rgba($color: #000000, $alpha: 0);
+  p {
+    margin: 0px 10px 0px 0px;
   }
+}
+
+.comment {
+  display: grid;
+  margin: 10px 20px 0px 20px;
+  grid-template-rows: auto min-content;
 }

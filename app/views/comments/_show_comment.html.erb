@@ -1,4 +1,10 @@
-<div class="comment-box">
-  <h4 class='comment-box-title'><%= comment.author.email %></h4>
-  <p class='comment-box-body'><%= comment.body %></p>
+<div class="comment">
+  <div class="comment-box">
+    <h4 class='comment-box-title'><%= comment.author.email %></h4>
+    <p class='comment-box-body'><%= comment.body %></p>
+  </div>
+  <div class="comment-links">
+    <%= link_to likes_path(like: {post_id: post.id, user_id: current_user.id}), 'Like' %>
+    <p>Reply</p>
+  </div>
 </div>

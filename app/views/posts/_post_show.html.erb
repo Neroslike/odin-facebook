@@ -5,15 +5,17 @@
   <div class="post-body">
     <p><%= post.body %></p>
   </div>
-  <div class="post-attachment">
-    <% post.pictures.each do |picture| %>
-      <%= link_to image_tag(picture, class: 'post-picture modal-link'), post, data: { turbo_frame: 'modal' }, 'data-action': 'post#toggleScrolling' %>
-    <% end %>
-  </div>
+  <% if post.pictures.attached? %>
+    <div class="post-attachment">
+      <% post.pictures.each do |picture| %>
+        <%= link_to image_tag(picture, class: 'post-picture modal-link'), post %>
+      <% end %>
+    </div>
+  <% end %>
   <%= turbo_frame_tag post, class: 'post-frame' do %>
     <div class="post-analytics">
       <p>Likes: <%= post.likes.count %></p>
-      <p>Comments: 8</p>
+      <p>Comments: <%= post.comments.count %></p>
     </div>
     <div class="post-resources">
       <% if current_user.liked_posts.pluck(:post_id).include?(post.id) %>
@@ -33,4 +35,8 @@
       <% end %>
     </div>
   <% end %>
+  <div class="post-comments">
+    <div class="new-comment-index"><%= render 'comments/new_comment', post: post %></div>
+    <div class="comments-index"><%= render 'comments/post_comments', comments: post.comments.take(2) %></div>
+  </div>
 </div>
