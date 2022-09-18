@@ -3,7 +3,7 @@
     <%= f.text_area 'comment[body]', class: 'comment-input', rows: '1', data: {'comments-target': 'textArea', 'action': 'keydown->comments#submit'}, placeholder: 'Write a comment' %>
   </div>
   <%= f.hidden_field 'comment[user_id]', value: current_user.id %>
-  <%= f.hidden_field 'comment[post_id]', value: post.id %>
+  <%= f.hidden_field 'comment[parent_id]', value: params[:parent_id] %>
   <%= button_tag class: 'new-comment-button', data: {'action': 'comments#submitAndCleanup'} do %>
     <i class="fa-solid fa-paper-plane comment-send-icon"></i>
   <% end %>
