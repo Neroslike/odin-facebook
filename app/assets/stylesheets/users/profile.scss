@@ -1,0 +1,107 @@
+.profile-background-picture {
+  width: 100%;
+  height: 400px;
+
+  img {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.profile-header {
+  width: 100%;
+  grid-row: 1 / 2;
+}
+
+.profile-page {
+  display: grid;
+  height: 100%;
+  width: 90%;
+  color: white;
+  grid-template-rows: repeat(4, auto);
+
+  hr {
+    grid-column: 1 / 2;
+    width: 98%;
+    border: 0;
+    border-top: 1px solid gray;
+    margin: 0;
+    justify-self: center;
+  }
+}
+
+.profile-resources {
+  grid-row: 2 / 3;
+  display: grid;
+  grid-template-columns: min-content auto auto;
+  margin-left: 40px;
+}
+
+.profile-details {
+  grid-column: 2 / 3;
+  margin-left: 15px;
+}
+
+.profile-buttons {
+  grid-column: 3 / 4;
+  justify-self: end;
+  align-self: end;
+  margin-bottom: 20px;
+  margin-right: 35px;
+
+  button {
+    all: unset;
+    cursor: pointer;
+  }
+
+  .profile-button {
+    padding: 10px;
+    border-radius: 8px;
+    margin-right: 5px;
+  }
+
+  .profile-button:hover {
+    box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+  }
+
+  .profile-message-button {
+    background-color: rgb(0, 111, 205);
+  }
+
+  .profile-friends-button {
+    background-color: rgb(36, 37, 38);
+  }
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  bottom: 20px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid black;
+  }
+}
+
+.common-friends-pics {
+  width: 30px;
+  height: 30px;
+  display: flex;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+.profile-navbar {
+  ul {
+    display: flex;
+  }
+}

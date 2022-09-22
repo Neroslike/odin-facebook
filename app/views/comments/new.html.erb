@@ -1,1 +1,3 @@
-<%= render 'new_comment', post: Post.find(params[:post_id]) %>
+<%= turbo_frame_tag "new_reply_#{params[:parent_id]}" do %>
+  <%= render 'new_comment', post: Post.find(params[:post_id]) %>
+<% end %>

@@ -4,4 +4,5 @@ class Comment < ApplicationRecord
   has_many :replies, class_name: 'Comment', foreign_key: :parent_id, dependent: :destroy
   belongs_to :post, optional: true
   belongs_to :author, class_name: 'User', foreign_key: :user_id
+  scope :original_comment, -> { where(parent_id: nil) }
 end

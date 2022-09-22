@@ -13,7 +13,7 @@
         <i class="fa-regular fa-thumbs-up like-icon"></i> Like
       <% end %>
     <% end %>
-    <%= button_to root_path, class: 'comment-button button' do %>
+    <%= button_to root_path, class: 'comment-button button', data: { 'action': 'post#focusComment:prevent' } do %>
       <i class="fa-solid fa-comment-dots"></i> Comment
     <% end %>
     <%= button_to root_path, class: 'share-button button' do %>

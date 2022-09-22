@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   end
   post 'posts/:id/create_commment', to: 'posts#create_comment', as: 'create_comment'
   resources :likes, only: %i[create destroy]
-
+  resources :users
   root "posts#index"
 end

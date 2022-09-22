@@ -1,10 +1,18 @@
 <div class="comment">
-  <div class="comment-box">
-    <h4 class='comment-box-title'><%= comment.author.email %></h4>
-    <p class='comment-box-body'><%= comment.body %></p>
+  <div class="user-comment">
+    <%= image_tag 'test-profile', class: 'user-pfp' %>
+    <div class="comment-box">
+      <h4 class='comment-box-title'><%= comment.author.first_name %> <%= comment.author.last_name %></h4>
+      <p class='comment-box-body'><%= comment.body %></p>
+    </div>
+    <div class="comment-links">
+      <%= link_to 'Like', root_path %>
+      <%= link_to 'Reply', new_post_comment_path(comment.post, parent_id: comment.id), data: {'turbo-frame': "new_reply_#{comment.id}"} %>
+    </div>
   </div>
-  <div class="comment-links">
-    <p>Like</p>
-    <%= link_to 'Reply', new_post_comment_path(comment.post, parent_id: comment.id) %>
+  <%= turbo_frame_tag "new_reply_#{comment.id}" do %>
+  <% end %>
+  <div class='comment-replies'>
+    <%= render 'comments/post_comments', comments: comment.replies %>
   </div>
 </div>

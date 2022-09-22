@@ -1,6 +1,6 @@
 <%= form_with url: create_comment_path(post), method: :post, class: 'new-comment-box', data: {'controller': 'comments'} do |f|%>
   <div class='new-comment-input' data-comments-target='editableDiv'>
-    <%= f.text_area 'comment[body]', class: 'comment-input', rows: '1', data: {'comments-target': 'textArea', 'action': 'keydown->comments#submit'}, placeholder: 'Write a comment' %>
+    <%= f.text_area 'comment[body]', class: 'comment-input', rows: '1', data: {'post-target': 'textAreas', 'comments-target': 'textArea', 'action': 'keydown->comments#submit'}, placeholder: 'Write a comment' %>
   </div>
   <%= f.hidden_field 'comment[user_id]', value: current_user.id %>
   <%= f.hidden_field 'comment[parent_id]', value: params[:parent_id] %>

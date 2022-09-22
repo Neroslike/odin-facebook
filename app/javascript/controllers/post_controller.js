@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ['modalLink']
+  static targets = ['textAreas']
 
   toggleScrolling() {
     if (this.element.style.overflow == 'hidden') {
@@ -9,5 +9,9 @@ export default class extends Controller {
     } else {
       this.element.style.overflow = 'hidden'
     }
+  }
+
+  focusComment() {
+    this.textAreasTarget.focus({focusVisible: true})
   }
 }

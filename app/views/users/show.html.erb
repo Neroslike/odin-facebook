@@ -1,0 +1,31 @@
+<div class="profile-page">
+  <%= render 'components/profile_header' %>
+  <div class="profile-resources">
+    <div class="profile-picture">
+      <%= image_tag 'test-profile' %>
+    </div>
+    <div class="profile-details">
+      <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+      <p>56 Friends • 8 Friends in common</p>
+      <div class='common-friends-pics'>
+        <% 8.times do %>
+          <%= image_tag 'test-profile' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="profile-buttons">
+      <button class='profile-friends-button profile-button'><i class="fa-solid fa-user-group"></i> Friends</button>
+      <button class='profile-message-button profile-button'><i class="fa-brands fa-facebook-messenger"></i> Message</button>
+    </div>
+  </div>
+  <hr>
+  <div class="profile-navbar">
+    <ul>
+      <li>Posts</li>
+      <li>About</li>
+      <li>Friends</li>
+      <li>Pictures</li>
+      <li>Videos</li>
+    </ul>
+  </div>
+</div>

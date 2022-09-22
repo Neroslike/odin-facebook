@@ -1,6 +1,6 @@
-<div class="post">
+<div class="post" data-controller='post'>
   <div class="post-title">
-    <h3><%= post.author.email %></h3>
+    <h3><%= post.author.first_name %> <%= post.author.last_name %></h3>
   </div>
   <div class="post-body">
     <p><%= post.body %></p>
@@ -27,7 +27,7 @@
           <i class="fa-regular fa-thumbs-up like-icon"></i> Like
         <% end %>
       <% end %>
-      <%= button_to root_path, class: 'comment-button button' do %>
+      <%= button_to root_path ,class: 'comment-button button', data: { 'action': 'post#focusComment:prevent' } do %>
         <i class="fa-solid fa-comment-dots"></i> Comment
       <% end %>
       <%= button_to root_path, class: 'share-button button' do %>
@@ -37,6 +37,6 @@
   <% end %>
   <div class="post-comments">
     <div class="new-comment-index"><%= render 'comments/new_comment', post: post %></div>
-    <div class="comments-index"><%= render 'comments/post_comments', comments: post.comments.take(2) %></div>
+    <div class="comments-index"><%= render 'comments/post_comments', comments: post.comments.original_comment.take(2) %></div>
   </div>
 </div>
