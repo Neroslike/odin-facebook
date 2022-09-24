@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :comments
   end
   post 'posts/:id/create_commment', to: 'posts#create_comment', as: 'create_comment'
+  post 'users/create_friendship', to: 'users#create_friendship', as: 'create_friendship'
   resources :likes, only: %i[create destroy]
   resources :users
   root "posts#index"

@@ -1,0 +1,9 @@
+<div class="test-panel">
+  <% @users.each do |user| %>
+    <div class="friend-suggestion">
+      <%= image_tag 'test-profile' %>
+      <p><%= user.first_name %><%= user.last_name %></p>
+      <%= button_to 'Add friend', create_friendship_path(user_id: user.id) %>
+    </div>
+  <% end %>
+</div>

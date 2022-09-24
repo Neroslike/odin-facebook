@@ -6,12 +6,18 @@
       <p class='comment-box-body'><%= comment.body %></p>
     </div>
     <div class="comment-links">
-      <%= link_to 'Like', root_path %>
-      <%= link_to 'Reply', new_post_comment_path(comment.post, parent_id: comment.id), data: {'turbo-frame': "new_reply_#{comment.id}"} %>
+      <%= turbo_frame_tag comment, class: 'comment-links-frame' do %>
+        <% if current_user.likes.pluck(:comment_id).include?(comment.id) %>
+          <%= button_to 'Like', like_path(comment.likes.find_by(user_id: current_user.id)), method: :delete, class: 'like-active comment-like-button' %>
+        <% else %>
+          <%= button_to 'Like', likes_path(like: {comment_id: comment.id, user_id: current_user.id}), data: {'turbo-method': :post}, class: 'comment-like-button' %>
+        <% end %>
+        <%= link_to 'Reply', new_post_comment_path(comment.post, parent_id: comment.id), data: {'turbo-frame': "new_reply_#{comment.id}"} %>
+      <% end %>
     </div>
+    <%= turbo_frame_tag "new_reply_#{comment.id}", class: 'reply-frame' do %>
+    <% end %>
   </div>
-  <%= turbo_frame_tag "new_reply_#{comment.id}" do %>
-  <% end %>
   <div class='comment-replies'>
     <%= render 'comments/post_comments', comments: comment.replies %>
   </div>

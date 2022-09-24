@@ -15,6 +15,7 @@ $background-color: rgb(36, 37, 38);
   align-items: center;
   justify-content: space-around;
   border-bottom: 1px solid gray;
+  z-index: 99;
 
   a {
     border-radius: 10px;

@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   def index
     @posts = Post.includes(:author, :likes)
     @like = Like.new
+    @users = User.all
   end
 
   def show

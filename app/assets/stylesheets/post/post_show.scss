@@ -7,14 +7,16 @@ $content-padding: 0 20px 0 20px;
   display: grid;
   color: white;
   border-radius: 10px;
-  width: clamp(400px, 35vw, 650px);
+  width: clamp(400px, 40vw, 750px);
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 30px auto auto 95px;
+  grid-template-rows: min-content auto auto 95px;
   align-items: center;
   background-color: $background-color;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   overflow: hidden;
   margin-bottom: 35px;
+  grid-column: 2 / 3;
+  justify-self: center;
 }
 
 .post:first-of-type {
@@ -24,8 +26,27 @@ $content-padding: 0 20px 0 20px;
 .post-title {
   grid-column: 1 / 4;
   grid-row: 1 / 2;
-  padding: $content-padding;
+  padding: 0 20px 0 10px;
   padding-top: 10px;
+  display: grid;
+  grid-template-columns: min-content auto;
+  align-items: center;
+
+  img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+  }
+
+  h3 {
+    padding: 0;
+    margin: 2px 0 0 8px;
+    align-self: flex-start;
+    a {
+      text-decoration: none;
+      color: white;
+    }
+  }
 }
 
 .post-body {
@@ -115,6 +136,7 @@ $content-padding: 0 20px 0 20px;
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-template-rows: 50px auto;
+  grid-column: 1 / 4;
 }
 
 .post-modal-attachment {
@@ -184,4 +206,24 @@ $content-padding: 0 20px 0 20px;
 .post-comments {
   background-color: $comments-background;
   padding: 10px;
+}
+
+.test-panel {
+  background-color: $background-color;
+  color: white;
+  height: min-content;
+  border-radius: 10px;
+  padding: 10px;
+  
+  .friend-suggestion {
+    display: flex;
+    
+    img {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+    }
+
+    p {}
+  }
 }

@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :liked_posts, class_name: 'Like', foreign_key: 'user_id'
+  has_many :likes, class_name: 'Like', foreign_key: 'user_id'
   has_many :posts
   has_many :comments
   has_and_belongs_to_many :friends,
