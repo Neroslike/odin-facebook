@@ -1,9 +1,18 @@
-<div class="test-panel">
+<div class="friend-suggestions sidebar-components">
+  <h3>Suggested friends</h3>
   <% @users.each do |user| %>
-    <div class="friend-suggestion">
-      <%= image_tag 'test-profile' %>
-      <p><%= user.first_name %><%= user.last_name %></p>
-      <%= button_to 'Add friend', create_friendship_path(user_id: user.id) %>
-    </div>
+    <%= turbo_frame_tag user do %>
+      <% unless current_user == user || (current_user.friend_of?(user) || current_user.pending_requests.received.include?(user)) %>
+        <div class="sidebar-component-users" data-controller= 'components'>
+          <%= link_to image_tag('test-profile'), user, class: 'sidebar-user-image', target: '_top' %>
+          <%= link_to "#{user.first_name} #{user.last_name}", user, class: 'sidebar-user-names', target: '_top' %>
+          <% if current_user.pending_friend_of?(user) && current_user.pending_requests.sent.include?(user) %>
+            <%= button_to 'Cancel request', decline_friend_request_path(user_id: user.id), class: 'sidebar-user-button decline', form: {class: 'send-request'} %>
+          <% else %>
+            <%= button_to 'Add friend', create_friend_request_path(user_id: user.id), class: 'sidebar-user-button', form: {class: 'send-request'} %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
   <% end %>
 </div>

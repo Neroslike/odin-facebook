@@ -4,12 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ['textArea']
 
-  // copyAndSubmit() {
-  //   this.textInputTarget.value = this.editableDivTarget.innerHTML
-  //   this.element.submit();
-  //   this.editableDivTarget.innerHTML = ''
-  // }
-
   connect() {
     // const tx = document.getElementsByTagName("textarea")
     const tx = this.textAreaTargets
@@ -34,6 +28,11 @@ export default class extends Controller {
     e.preventDefault()
     this.element.submit();
     this.textAreaTarget.value = ''
+  }
+
+  focusReply(e) {
+    this.frame = e.target.getElementsByTagName('textarea')[0]
+    this.frame.focus()
   }
 }
 

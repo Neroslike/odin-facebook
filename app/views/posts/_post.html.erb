@@ -15,7 +15,11 @@
   <% end %>
   <%= turbo_frame_tag post, class: 'post-frame' do %>
     <div class="post-analytics">
-      <p>Likes: <%= post.likes.count %></p>
+      <p>
+        <%= link_to likes_path(post_id: post.id), data: { turbo_frame: 'modal', action: 'post#toggleBodyScrolling' }, class: 'like-count' do %>
+          Likes: <%= post.likes.count %>
+        <% end %>
+      </p>
       <p>Comments: <%= post.comments.count %></p>
     </div>
     <div class="post-resources">

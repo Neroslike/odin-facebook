@@ -1,4 +1,4 @@
-<div class="comment">
+<div class="comment" data-controller='comments'>
   <div class="user-comment">
     <%= image_tag 'test-profile', class: 'user-pfp' %>
     <div class="comment-box">
@@ -12,10 +12,10 @@
         <% else %>
           <%= button_to 'Like', likes_path(like: {comment_id: comment.id, user_id: current_user.id}), data: {'turbo-method': :post}, class: 'comment-like-button' %>
         <% end %>
-        <%= link_to 'Reply', new_post_comment_path(comment.post, parent_id: comment.id), data: {'turbo-frame': "new_reply_#{comment.id}"} %>
+        <%= link_to 'Reply', new_post_comment_path(comment.post, parent_id: comment.id), data: {turbo_frame: "new_reply_#{comment.id}"} %>
       <% end %>
     </div>
-    <%= turbo_frame_tag "new_reply_#{comment.id}", class: 'reply-frame' do %>
+    <%= turbo_frame_tag "new_reply_#{comment.id}", class: 'reply-frame', data: {action: 'turbo:frame-render->comments#focusReply'} do %>
     <% end %>
   </div>
   <div class='comment-replies'>

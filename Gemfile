@@ -80,3 +80,5 @@ gem "cssbundling-rails", "~> 1.1"
 gem "savon", "~> 2.13"
 
 gem "httpclient", "~> 2.8"
+
+gem "pry-byebug", "~> 3.10"

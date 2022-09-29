@@ -7,17 +7,34 @@
       </div>
       <div class="profile-details">
         <h2><%= @user.first_name %> <%= @user.last_name %></h2>
-        <p>56 Friends • 8 Friends in common</p>
+        <p><%= @user.friends.count %> Friends</p>
         <div class='common-friends-pics'>
           <% 8.times do %>
             <%= image_tag 'test-profile' %>
           <% end %>
         </div>
       </div>
-      <div class="profile-buttons">
+      <%= turbo_frame_tag @user, class: 'profile-buttons' do %>
+        <% if current_user != @user && !current_user.friend_of?(@user) %>
+          <% if !current_user.pending_friend_of?(@user) %>
+            <%= button_to create_friend_request_path(user_id: @user.id), class: 'profile-message-button profile-button' do %>
+              <i class="fa-solid fa-user-plus"></i> Add Friend
+            <% end %>
+          <% elsif current_user.pending_requests.sent.include?(@user) %>
+            <%= button_to decline_friend_request_path(user_id: @user.id), class: 'profile-message-button profile-button' do %>
+              <i class="fa-solid fa-user-plus"></i> Cancel Request
+            <% end %>
+          <% else %>
+            <%= button_to decline_friend_request_path(user_id: @user.id), class: 'profile-message-button profile-button' do %>
+              <i class="fa-solid fa-user-plus"></i> Decline Request
+            <% end %>
+          <% end %>
+        <% end %>
+        <% unless current_user == @user && !current_user.friend_of?(@user) %>
+          <button class='profile-message-button profile-button'><i class="fa-brands fa-facebook-messenger"></i> Message</button>
+        <% end %>
         <button class='profile-friends-button profile-button'><i class="fa-solid fa-user-group"></i> Friends</button>
-        <button class='profile-message-button profile-button'><i class="fa-brands fa-facebook-messenger"></i> Message</button>
-      </div>
+      <% end %>
     </div>
     <hr>
     <div class="profile-navbar">
@@ -47,9 +64,7 @@
       <h2>Posts</h2>
     </div>
     <div class="profile-posts">
-      <% @user.posts.reverse_each do |p| %>
-        <%= render 'posts/post_show', post: p %>
-      <% end %>
+      <%= render @user.posts %>
     </div>
   </div>
 </div>

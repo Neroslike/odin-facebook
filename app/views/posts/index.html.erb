@@ -1,4 +1,6 @@
+<%= turbo_frame_tag id="new_post", src:new_post_path, class: 'new-index-post' %>
+<div class="posts-grid" id='posts'>
+  <%= render @posts %>
+</div>
 <%= render 'components/friend_suggestions' %>
-<% @posts.reverse_each do |p| %>
-  <%= render 'post_show', post: p %>
-<% end %>
+<%= render 'components/friend_requests' %>

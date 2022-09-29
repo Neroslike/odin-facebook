@@ -1,0 +1,17 @@
+<%= turbo_frame_tag 'modal', data: { controller: 'post' } do %>
+  <div class="likes-modal" data-post-target='modal' data-action='keydown@window->post#closeWithKeyboard click@window->post#closeBackground'>
+    <div class="post-likes" data-post-target='likeModal'>
+      <div class="like-show-header">
+        <h3>Who liked this post</h3>
+        <%= link_to posts_path, data: { action: 'post#hideModal:prevent' } do %>
+          <i class="fa-solid fa-xmark close-button"></i>
+        <% end %>
+      </div>
+      <div class="like-show-users">
+        <% 15.times do %>
+          <%= render @likes %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

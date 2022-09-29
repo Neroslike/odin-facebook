@@ -1,0 +1,19 @@
+<div class="friend-requests sidebar-components">
+  <h3>Pending friend requests</h3>
+  <% current_user.pending_requests.received.each do |user| %>
+    <%= turbo_frame_tag "incoming_#{user.id}" do %>
+      <div class="sidebar-component-users" data-controller= 'components' id='requests'>
+        <%= link_to image_tag('test-profile'), user, class: 'sidebar-user-image', target: '_top' %>
+        <%= link_to "#{user.first_name} #{user.last_name}", user, class: 'sidebar-user-names', target: '_top' %>
+        <% if current_user.pending_list.where(other_user_id: user.id)[0].sender_id == current_user.id %>
+          <div class="sidebar-buttons"><%= button_to 'Decline request', decline_friend_request_path(user_id: user.id), class: 'sidebar-user-button decline', data: {'action': 'components#decline'}%></div>
+        <% else %>
+          <div class="sidebar-buttons">
+            <%= button_to 'Confirm', create_friendship_path(user_id: user.id), class: 'sidebar-user-button' %>
+            <%= button_to 'Decline', decline_friend_request_path(user_id: user.id), class: 'sidebar-user-button decline'%>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

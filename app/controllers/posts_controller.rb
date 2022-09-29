@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.includes(:author, :likes)
+    @posts = Post.build_feed(current_user).order(created_at: :desc)
     @like = Like.new
     @users = User.all
   end
@@ -16,10 +16,12 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    if @post.save
-      redirect_to @post
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @post.save
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 

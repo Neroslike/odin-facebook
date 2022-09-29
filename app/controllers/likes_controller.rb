@@ -9,6 +9,10 @@ class LikesController < ApplicationController
     redirect_to posts_path
   end
 
+  def index
+    @likes = Post.find(params[:post_id]).likes
+  end
+
   private
 
   def like_params
