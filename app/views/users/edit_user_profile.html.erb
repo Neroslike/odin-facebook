@@ -1,0 +1,19 @@
+<%= form_with model: @user, url: update_user_profile_path do |f| %>
+  <%= f.label :school %>
+  <%= f.text_field :school %>
+  <%= f.label :high_school %>
+  <%= f.text_field :high_school %>
+  <%= f.label :college %>
+  <%= f.text_field :college %>
+  <%= f.label :university %>
+  <%= f.text_field :university %>
+  <%= f.label :profession %>
+  <%= f.text_field :profession %>
+  <%= f.label :quote %>
+  <%= f.text_field :quote %>
+  <%= f.label :profile_pic %>
+  <%= f.file_field :profile_pic %>
+  <%= f.label :background_pic %>
+  <%= f.file_field :background_pic %>
+  <%= f.submit %>
+<% end %>

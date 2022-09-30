@@ -1,9 +1,13 @@
 <div class="profile-page">
   <div class="profile-user-info">
-    <%= render 'components/profile_header' %>
+    <%= render 'components/profile_header', user: @user %>
     <div class="profile-resources">
       <div class="profile-picture">
-        <%= image_tag 'test-profile' %>
+        <% if @user.profile_pic.attached? %>
+          <%= image_tag @user.profile_pic %>
+        <% else %>
+          <%= image_tag 'blank-profile-pic' %>
+        <% end %>
       </div>
       <div class="profile-details">
         <h2><%= @user.first_name %> <%= @user.last_name %></h2>
@@ -15,6 +19,11 @@
         </div>
       </div>
       <%= turbo_frame_tag @user, class: 'profile-buttons' do %>
+        <% if current_user == @user %>
+          <%= link_to edit_user_profile_path, class: 'profile-message-button profile-button', target: '_top' do %>
+            <i class="fa-solid fa-user-pen"></i> Edit Profile
+          <% end %>
+        <% end %>
         <% if current_user != @user && !current_user.friend_of?(@user) %>
           <% if !current_user.pending_friend_of?(@user) %>
             <%= button_to create_friend_request_path(user_id: @user.id), class: 'profile-message-button profile-button' do %>
@@ -50,21 +59,26 @@
   <div class="profile-content">
     <div class='profile-content-details'>
       <h3>Details</h3>
-      <p class='quote'>Some quote</p>
+      <p class='quote'><%= @user.quote %></p>
       <hr>
-      <p>Engineer in Facebook</p>
-      <p>Studied at Harvard</p>
-      <p>Studied at MIT</p>
+      <p>School: <%= @user.school %></p>
+      <p>High School: <%= @user.high_school %></p>
+      <p>College: <%= @user.college %></p>
+      <p>University: <%= @user.university %></p>
     </div>
     <div class="profile-content-comment">
-      <%= image_tag 'test-profile' %>
-      <%= render 'comments/new_comment', post: Post.last %>
+      <% if current_user.profile_pic.attached? %>
+        <%= image_tag current_user.profile_pic %>
+      <% else %>
+        <%= image_tag 'blank-profile-pic' %>
+      <% end %>
+      <%= turbo_frame_tag 'new_comment', src: new_post_comment_path(Post.last) %>
     </div>
     <div class="profile-posts-identifier">
       <h2>Posts</h2>
     </div>
     <div class="profile-posts">
-      <%= render @user.posts %>
+      <%= render @posts %>
     </div>
   </div>
 </div>

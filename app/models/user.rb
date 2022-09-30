@@ -2,6 +2,9 @@ class User < ApplicationRecord
   has_many :likes, class_name: 'Like', foreign_key: 'user_id'
   has_many :posts
   has_many :comments
+  has_one_attached :profile_pic
+  has_one_attached :background_pic
+  has_many_attached :pictures
 
   # Self referencing friendship system
   has_many :friendship_list, -> { confirmed }, foreign_key: :user_id, class_name: 'Friendship'

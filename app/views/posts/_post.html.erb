@@ -1,6 +1,10 @@
 <div class="post" data-controller='post'>
   <div class="post-title">
-    <%= link_to image_tag('test-profile'), post.author %>
+    <% if post.author.profile_pic.attached? %>
+      <%= link_to image_tag(post.author.profile_pic), post.author %>
+    <% else %>
+      <%= link_to image_tag('blank-profile-pic'), post.author %>
+    <% end %>
     <h3><%= link_to "#{post.author.first_name} #{post.author.last_name}", post.author %></h3>
   </div>
   <div class="post-body">
@@ -41,7 +45,9 @@
     </div>
   <% end %>
   <div class="post-comments">
-    <div class="new-comment-index"><%= render 'comments/new_comment', post: post %></div>
-    <div class="comments-index"><%= render 'comments/post_comments', comments: post.comments.original_comment.take(2) %></div>
+    <div class="new-comment-index">
+      <%= turbo_frame_tag 'new_comment', src: new_post_comment_path(post) %>
+    </div>
+    <div class="comments-index" id='comments'><%= render post.comments.original_comment.order(created_at: :desc) %></div>
   </div>
 </div>

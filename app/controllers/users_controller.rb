@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def create_friend_request
@@ -24,5 +25,25 @@ class UsersController < ApplicationController
   def delete_friend
     @user = User.find(params[:user_id])
     current_user.remove_friend(@user)
+  end
+
+  def edit_user_profile
+    @user = User.find(params[:id])
+  end
+
+  def update_user_profile
+    @user = User.find(params[:id])
+
+    if @user.update(user_details)
+      redirect_to @user
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  private
+
+  def user_details
+    params.require(:user).permit(:school, :high_school, :college, :university, :profession, :profile_pic, :background_pic, :quote)
   end
 end

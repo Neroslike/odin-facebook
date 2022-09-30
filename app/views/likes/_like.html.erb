@@ -1,4 +1,8 @@
 <div class="like-modal-show-user">
-  <%= link_to image_tag('test-profile'), like.user, target: '_top' %>
+  <% if like.user.profile_pic.attached? %>
+    <%= link_to image_tag(like.user.profile_pic), like.user, target: '_top' %>
+  <% else %>
+    <%= link_to image_tag('blank-profile-pic'), like.user, target: '_top' %>
+  <% end %>
   <%= link_to "#{like.user.first_name} #{like.user.last_name}", like.user, target: '_top' %>
 </div>

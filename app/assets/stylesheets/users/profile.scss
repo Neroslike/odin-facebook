@@ -33,6 +33,7 @@ $border-radius: 10px;
   background-color: $background-color;
   border-radius: $border-radius;
   margin-bottom: 25px;
+  overflow: hidden;
 
   hr {
     grid-column: 1 / 2;
@@ -68,6 +69,11 @@ $border-radius: 10px;
   button {
     all: unset;
     cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
   }
 
   .profile-button {
@@ -213,4 +219,10 @@ $border-radius: 10px;
     margin-bottom: 25px;
     width: 100%;
   }
+}
+
+.edit-button {
+  text-decoration: none;
+  color: white;
+
 }

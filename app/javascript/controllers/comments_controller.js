@@ -26,7 +26,8 @@ export default class extends Controller {
 
   submitAndCleanup(e) {
     e.preventDefault()
-    this.element.submit();
+    //Use requestSubmit() here to send to allow the form to send as TURBO_STREAM
+    this.element.requestSubmit();
     this.textAreaTarget.value = ''
   }
 

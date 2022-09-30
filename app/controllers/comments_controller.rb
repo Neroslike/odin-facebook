@@ -5,21 +5,24 @@ class CommentsController < ApplicationController
 
   def new
     @comment = Comment.new
+    @post = Post.find(params[:post_id])
   end
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = Post.find(params[:post_id]).comments.build(comment_params)
 
-    if @comment.save
-      redirect_to root_path
-    else
-      render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @comment.save
+        format.turbo_stream
+      else
+        format.html { render :new, status: :unprocessable_entity }
+      end
     end
   end
 
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :post_id, :user_id, :parent_id)
+    params.require(:comment).permit(:body, :user_id, :parent_id)
   end
 end

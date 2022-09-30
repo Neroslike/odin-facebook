@@ -9,7 +9,7 @@ class Post < ApplicationRecord
   def self.build_feed(current_user)
     posts = current_user.posts.includes(:author, :likes)
     current_user.friends.each do |friend|
-      posts += friend.posts.includes(:author, :likes)
+      posts = posts.or(friend.posts.includes(:author, :likes))
     end
     posts
   end

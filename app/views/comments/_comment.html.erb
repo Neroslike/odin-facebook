@@ -1,8 +1,12 @@
 <div class="comment" data-controller='comments'>
   <div class="user-comment">
-    <%= image_tag 'test-profile', class: 'user-pfp' %>
+    <% if comment.author.profile_pic.attached? %>
+      <%= link_to image_tag(comment.author.profile_pic, class: 'user-pfp'), comment.author, target: '_top' %>
+    <% else %>
+      <%= link_to image_tag('blank-profile-pic', class: 'user-pfp'), comment.author, target: '_top' %>
+    <% end %>
     <div class="comment-box">
-      <h4 class='comment-box-title'><%= comment.author.first_name %> <%= comment.author.last_name %></h4>
+      <h4 class='comment-box-title'><%= link_to "#{comment.author.first_name} #{comment.author.last_name}", comment.author %></h4>
       <p class='comment-box-body'><%= comment.body %></p>
     </div>
     <div class="comment-links">
@@ -18,7 +22,7 @@
     <%= turbo_frame_tag "new_reply_#{comment.id}", class: 'reply-frame', data: {action: 'turbo:frame-render->comments#focusReply'} do %>
     <% end %>
   </div>
-  <div class='comment-replies'>
+  <div class='comment-replies' id='comment_replies'>
     <%= render 'comments/post_comments', comments: comment.replies %>
   </div>
 </div>

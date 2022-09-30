@@ -22,10 +22,16 @@ body {
   // grid-auto-rows: auto;
   justify-items: center;
   margin-top: 30px;
+  color: white;
 }
 
 .hidden {
   display: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 
 // div.post:first-of-type {

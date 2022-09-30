@@ -1,5 +1,9 @@
 <div class="profile-header">
   <div class='profile-background-picture'>
-    <%= image_tag 'test-profile-background' %>
+    <% if user.background_pic.attached? %>
+      <%= image_tag user.background_pic %>
+    <% else %>
+      <%= image_tag 'blank-profile-pic' %>
+    <% end %>
   </div>
 </div>
