@@ -3,7 +3,8 @@
   "private": "true",
   "dependencies": {
     "react-native-autogrow-textinput": "^5.4.0",
-    "sass": "^1.54.5"
+    "sass": "^1.54.5",
+    "stimulus-carousel": "^4.0.0"
   },
   "scripts": {
     "build:css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules"

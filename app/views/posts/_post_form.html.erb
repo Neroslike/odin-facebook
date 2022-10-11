@@ -1,7 +1,14 @@
-<%= form_with model: post do |f| %>
-  <%= f.label :body %>
-  <%= f.text_area :body %>
-  <%= f.file_field :pictures %>
-  <%= f.hidden_field :user_id, value: current_user.id %>
-  <%= f.submit %>
+<%= form_with model: post, data: {'controller': 'comments image-preview'} do |f| %>
+  <div class='new-post-buttons'>
+    <div class='new-comment-input new-post-input'>
+      <%= f.text_area :body, class: 'comment-input', rows: '1', data: {'post-target': 'textAreas', 'comments-target': 'textArea', 'action': 'keydown->comments#submit'}, placeholder: 'What are you thinking?' %>
+    </div>
+    <%= f.label :pictures, class: 'buttonfile' do %>
+      <i class="fa-regular fa-image"></i>
+    <% end %>
+    <%= f.file_field :pictures, class: 'inputfile', multiple: true, data: {image_preview_target: "input", action: "image-preview#addFile" } %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.submit class: 'submitpost' %>
+  </div>
+  <div data-image-preview-target='files'></div>
 <% end %>

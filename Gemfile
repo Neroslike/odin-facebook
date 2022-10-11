@@ -82,3 +82,5 @@ gem "savon", "~> 2.13"
 gem "httpclient", "~> 2.8"
 
 gem "pry-byebug", "~> 3.10"
+
+gem "pagy", "~> 5.10"

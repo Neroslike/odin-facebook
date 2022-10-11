@@ -1,12 +1,25 @@
 <div class='post-modal'>
   <div class='post-modal-header'>
-    <%= link_to 'javascript:history.back()', class: 'post-modal-back-link', 'data-action': 'post#toggleScrolling' do%>
+    <%= link_to 'javascript:history.back()', class: 'post-modal-back-link', 'data-action': 'post#toggleScrolling' do %>
       <i class="fa-solid fa-arrow-left-long"></i>
     <% end %>
   </div>
   <% if post.pictures.attached? %>
-    <div class="post-modal-attachment">
-      <%= image_tag post.pictures[0], class: 'post-modal-image' %>
+    <div class="post-modal-attachment swiper-container" data-controller="carousel" data-carousel-options-value='{
+    "pagination": { "el": ".swiper-pagination", 
+                    "dynamicBullets": "true" },
+    "navigation": { "nextEl": ".swiper-button-next", 
+                    "prevEl": ".swiper-button-prev"}}'>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-wrapper">
+        <% post.pictures.each do |picture| %>
+          <div class="swiper-slide">
+            <%= image_tag picture, class: 'post-modal-image' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
   <div class="post-modal-right">
@@ -15,9 +28,9 @@
       <p><%= post.body %></p>
     </div>
     <%= render 'components/post_resources', post: post %>
-    <div class="comments-box"><%= render 'comments/post_comments', comments: post.comments.original_comment %></div>
+    <div class="comments-box" id="comments"><%= render 'comments/post_comments', comments: post.comments.original_comment %></div>
     <div>
-      <%= render 'comments/new_comment', post: post %>
+      <%= turbo_frame_tag 'new_comment', src: new_post_comment_path(post) %>
     </div>
   </div>
 </div>

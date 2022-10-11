@@ -28,7 +28,11 @@ export default class extends Controller {
     e.preventDefault()
     //Use requestSubmit() here to send to allow the form to send as TURBO_STREAM
     this.element.requestSubmit();
-    this.textAreaTarget.value = ''
+    if (this.element.parentElement.className == 'reply-frame') {
+      this.element.remove()
+    } else {
+      this.textAreaTarget.value = ''
+    }
   }
 
   focusReply(e) {

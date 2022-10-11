@@ -12,9 +12,7 @@
   </div>
   <% if post.pictures.attached? %>
     <div class="post-attachment">
-      <% post.pictures.each do |picture| %>
-        <%= link_to image_tag(picture, class: 'post-picture modal-link'), post %>
-      <% end %>
+      <%= link_to image_tag(post.pictures[0], class: 'post-picture modal-link'), post %>
     </div>
   <% end %>
   <%= turbo_frame_tag post, class: 'post-frame' do %>

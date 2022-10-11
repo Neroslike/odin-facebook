@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :posts do
-    resources :comments
+    resources :comments do
+      collection do
+        post :index
+      end
+    end
   end
   post 'posts/:id/create_commment', to: 'posts#create_comment', as: 'create_comment'
   post 'users/create_friendship', to: 'users#create_friendship', as: 'create_friendship'
