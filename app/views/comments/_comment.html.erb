@@ -8,6 +8,7 @@
     <div class="comment-box">
       <h4 class='comment-box-title'><%= link_to "#{comment.author.first_name} #{comment.author.last_name}", comment.author %></h4>
       <p class='comment-box-body'><%= comment.body %></p>
+      <p class='comment-timestamp'><%= comment.created_at.localtime.to_fs(:short) %></p>
     </div>
     <div class="comment-links">
       <%= turbo_frame_tag comment, class: 'comment-links-frame' do %>

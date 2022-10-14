@@ -6,6 +6,7 @@
       <%= link_to image_tag('blank-profile-pic'), post.author %>
     <% end %>
     <h3><%= link_to "#{post.author.first_name} #{post.author.last_name}", post.author %></h3>
+    <p><%= post.created_at.localtime.to_fs(:short) %></p>
   </div>
   <div class="post-body">
     <p><%= post.body %></p>

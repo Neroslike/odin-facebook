@@ -17,7 +17,7 @@ $content-padding: 10px 20px 10px 20px;
 }
 
 .comment-box-body {
-  padding: 0 0 5px 0;
+  padding: 0 0 10px 0;
   margin: 0;
   margin-top: 2px;
   font-size: 16px;
@@ -81,4 +81,12 @@ $content-padding: 10px 20px 10px 20px;
 
 .reply-frame {
   grid-column: 2 / 3;
+}
+
+.comment-timestamp {
+  color: gray;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+  text-align: end;
 }
