@@ -1,0 +1,50 @@
+.login {
+  grid-column: 2 / 3;
+  padding: 10px;
+  background-color: #242526;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+  margin: 100px;
+
+  h1 {
+    text-align: center;
+  }
+}
+
+.field {
+  margin: 8px;
+}
+
+.signup-link {
+  background: #18191a;
+  font-size: 20px;
+  padding: 10px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.signup-link:hover {
+  box-shadow: inset 0 0 100px 100px rgb(255 255 255 / 20%);
+}
+
+.signup-buttons {
+  display: grid;
+
+  .actions {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+  }
+
+  .signup-link {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    justify-self: center;
+  }
+
+  .recover-link {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    justify-self: center;
+  }
+}

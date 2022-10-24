@@ -50,7 +50,25 @@ class PostsController < ApplicationController
     @comment = Post.find(params[:id]).comments.create(comment_params)
   end
 
+  def new_shared_post
+    @post = Post.new
+  end
+
+  def share_post
+    @post = Post.new(share_params)
+
+    if @post.save
+      redirect_to @post
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   private
+
+  def share_params
+    params.require(:post).permit(:user_id, :body, :shared_post_id)
+  end
 
   def post_params
     params.require(:post).permit(:body, :user_id, pictures: [])

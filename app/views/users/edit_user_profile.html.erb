@@ -1,19 +1,40 @@
-<%= form_with model: @user, url: update_user_profile_path do |f| %>
-  <%= f.label :school %>
-  <%= f.text_field :school %>
-  <%= f.label :high_school %>
-  <%= f.text_field :high_school %>
-  <%= f.label :college %>
-  <%= f.text_field :college %>
-  <%= f.label :university %>
-  <%= f.text_field :university %>
-  <%= f.label :profession %>
-  <%= f.text_field :profession %>
-  <%= f.label :quote %>
-  <%= f.text_field :quote %>
-  <%= f.label :profile_pic %>
-  <%= f.file_field :profile_pic %>
-  <%= f.label :background_pic %>
-  <%= f.file_field :background_pic %>
-  <%= f.submit %>
-<% end %>
+<div class="user-edit">
+  <h1>Edit profile</h1>
+  <%= form_with model: @user, url: update_user_profile_path, class: 'edit-user-form' do |f| %>
+    <div class="edit-user-field">
+      <%= f.label :school %>
+      <%= f.text_field :school %>
+    </div>
+    <div class="edit-user-field">
+      <%= f.label :high_school %>
+      <%= f.text_field :high_school %>
+    </div>
+    <div class="edit-user-field">
+      <%= f.label :college %>
+      <%= f.text_field :college %>
+    </div>
+    <div class="edit-user-field">
+      <%= f.label :university %>
+      <%= f.text_field :university %>
+    </div>
+    <div class="edit-user-field">
+      <%= f.label :profession %>
+      <%= f.text_field :profession %>
+    </div>
+    <div class="edit-user-field">
+      <%= f.label :quote %>
+      <%= f.text_field :quote %>
+    </div>
+    <% if false %>
+      <div class="edit-user-field">
+        <%= f.label :profile_pic %>
+        <%= f.file_field :profile_pic %>
+      </div>
+      <div class="edit-user-field">
+        <%= f.label :background_pic %>
+        <%= f.file_field :background_pic %>
+      </div>
+    <% end %>
+    <div class="edit-user-submit"><%= f.submit %></div>
+  <% end %>
+</div>

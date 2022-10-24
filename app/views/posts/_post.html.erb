@@ -6,15 +6,19 @@
       <%= link_to image_tag('blank-profile-pic'), post.author %>
     <% end %>
     <h3><%= link_to "#{post.author.first_name} #{post.author.last_name}", post.author %></h3>
-    <p><%= post.created_at.localtime.to_fs(:short) %></p>
+    <p><%= post.created_at.localtime.to_fs(:standard) %></p>
   </div>
   <div class="post-body">
     <p><%= post.body %></p>
   </div>
-  <% if post.pictures.attached? %>
-    <div class="post-attachment">
-      <%= link_to image_tag(post.pictures[0], class: 'post-picture modal-link'), post %>
-    </div>
+  <% if post.shared_post_id.nil? %>
+    <% if post.pictures.attached? %>
+      <div class="post-attachment">
+        <%= link_to image_tag(post.pictures[0], class: 'post-picture modal-link'), post %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="shared-post"><%= render 'posts/shared_post', post: Post.find(post.shared_post_id) %></div>
   <% end %>
   <%= turbo_frame_tag post, class: 'post-frame' do %>
     <div class="post-analytics">
@@ -38,7 +42,7 @@
       <%= button_to root_path ,class: 'comment-button button', data: { 'action': 'post#focusComment:prevent' } do %>
         <i class="fa-solid fa-comment-dots"></i> Comment
       <% end %>
-      <%= button_to root_path, class: 'share-button button' do %>
+      <%= button_to new_shared_post_path(post), class: 'share-button button', method: :get, data: {turbo_frame: 'modal', action: 'post#toggleBodyScrolling'} do %>
         <i class="fa-solid fa-share"></i> Share
       <% end %>
     </div>
@@ -47,6 +51,6 @@
     <div class="new-comment-index">
       <%= turbo_frame_tag 'new_comment', src: new_post_comment_path(post) %>
     </div>
-    <div class="comments-index" id='comments'><%= render post.comments.original_comment.order(created_at: :desc) %></div>
+    <div class="comments-index" id='comments_<%= post.id %>'><%= render post.comments.original_comment.order(created_at: :desc) %></div>
   </div>
 </div>

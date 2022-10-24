@@ -19,7 +19,7 @@ $background-color: rgb(36, 37, 38);
 }
 
 .new-comment-input:focus-within {
-  border: 2px rgb(235, 234, 231) solid;
+  outline: 2px rgb(235, 234, 231) solid;
 }
 
 .new-comment-button {

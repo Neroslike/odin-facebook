@@ -13,8 +13,3 @@ albert:
   id: 1
   email: test@sample.com
   encrypted_password: <%= User.new.send(:password_digest, '123456') %>
-
-karina:
-  id: 2
-  email: kari@sample.com
-  encrypted_password: <%= User.new.send(:password_digest, '123456') %>

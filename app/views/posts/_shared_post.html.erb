@@ -1,0 +1,17 @@
+<div class="post-title">
+  <% if post.author.profile_pic.attached? %>
+    <%= link_to image_tag(post.author.profile_pic, class: 'shared-post-pfp'), post.author %>
+  <% else %>
+    <%= link_to image_tag('blank-profile-pic', class: 'shared-post-pfp'), post.author %>
+  <% end %>
+  <h3><%= link_to "#{post.author.first_name} #{post.author.last_name}", post.author %></h3>
+  <p><%= post.created_at.localtime.to_fs(:standard) %></p>
+</div>
+<div class="post-body">
+  <p><%= post.body %></p>
+</div>
+<% if post.pictures.attached? %>
+  <div class="post-attachment">
+    <%= link_to image_tag(post.pictures[0], class: 'post-picture modal-link shared-post-picture'), post %>
+  </div>
+<% end %>

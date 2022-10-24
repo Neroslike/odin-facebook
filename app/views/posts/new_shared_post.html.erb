@@ -1,0 +1,19 @@
+<%= turbo_frame_tag 'modal', data: { controller: 'post' } do%>
+  <div class='share-post-modal' data-post-target='modal' data-action='keydown@window->post#closeWithKeyboard click@window->post#closeBackground'>
+    <div class='post-sharing' data-post-target='likeModal'>
+      <h2>Share this post</h2>
+      <%= form_with url: share_post_path do |f| %>
+        <div class='new-post-buttons share-buttons'>
+          <%= image_tag current_user.profile_pic %>
+          <div class='new-comment-input new-post-input' data-controller='comments'>
+            <%= f.text_area '[post][body]', class: 'comment-input', rows: '1', data: {'post-target': 'textAreas', 'comments-target': 'textArea', 'action': 'keydown->comments#submit'}, placeholder: 'Make a comment' %>
+          </div>
+          <%= f.hidden_field '[post][user_id]', value: current_user.id %>
+          <%= f.hidden_field '[post][shared_post_id]', value: params[:id] %>
+          <%= f.submit 'Share', class: 'submitpost' %>
+        </div>
+        <div data-image-preview-target='files'></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
