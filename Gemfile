@@ -84,3 +84,9 @@ gem "httpclient", "~> 2.8"
 gem "pry-byebug", "~> 3.10"
 
 gem "pagy", "~> 5.10"
+
+gem "omniauth-facebook", "~> 9.0"
+
+gem "omniauth-rails_csrf_protection", "~> 1.0"
+
+gem "city-state", "~> 0.1.0"

@@ -1,4 +1,4 @@
-<div class="user-edit">
+<div class="user-edit" data-controller='edit'>
   <h1>Edit profile</h1>
   <%= form_with model: @user, url: update_user_profile_path, class: 'edit-user-form' do |f| %>
     <div class="edit-user-field">
@@ -6,35 +6,43 @@
       <%= f.text_field :school %>
     </div>
     <div class="edit-user-field">
-      <%= f.label :high_school %>
-      <%= f.text_field :high_school %>
+      <%= f.label :company %>
+      <%= f.text_field :company %>
     </div>
     <div class="edit-user-field">
-      <%= f.label :college %>
-      <%= f.text_field :college %>
+      <%= f.label :country %>
+      <%= f.select :country, options_for_select(CS.countries.map { |key, value| [value] }) %>
     </div>
     <div class="edit-user-field">
-      <%= f.label :university %>
-      <%= f.text_field :university %>
+      <%= f.label :birthday %>
+      <%= f.date_field :birthday %>
     </div>
     <div class="edit-user-field">
-      <%= f.label :profession %>
-      <%= f.text_field :profession %>
+      <%= f.label :occupation %>
+      <%= f.text_field :occupation %>
     </div>
     <div class="edit-user-field">
       <%= f.label :quote %>
       <%= f.text_field :quote %>
     </div>
-    <% if false %>
-      <div class="edit-user-field">
-        <%= f.label :profile_pic %>
-        <%= f.file_field :profile_pic %>
-      </div>
-      <div class="edit-user-field">
-        <%= f.label :background_pic %>
-        <%= f.file_field :background_pic %>
-      </div>
-    <% end %>
-    <div class="edit-user-submit"><%= f.submit %></div>
+    <div class="edit-user-field">
+      <%= f.label :profile_pic, 'Profile Picture' %>
+      <%= f.file_field :profile_pic, data: { action: 'edit#showPreview' } %>
+      <% if @user.profile_pic.attached? %>
+        <%= image_tag @user.profile_pic, class: 'edit-profile-pic', id: 'user-profile-pic' %>
+      <% else %>
+        <img src="" alt="" class='edit-profile-pic' id='user-profile-pic'>
+      <% end %>
+    </div>
+    <div class="edit-user-field">
+      <%= f.label :background_pic, 'Background Picture' %>
+      <%= f.file_field :background_pic, data: { action: 'edit#showPreviewBg' } %>
+      <% if @user.background_pic.attached? %>
+        <%= image_tag @user.background_pic, class: 'edit-profile-pic', id: 'user-background-pic' %>
+      <% else %>
+        <img src="" alt="" class='edit-profile-pic' id='user-background-pic'>
+      <% end %>
+    </div>
+    <div class="edit-user-submit"><%= f.submit 'Save changes' %></div>
   <% end %>
 </div>

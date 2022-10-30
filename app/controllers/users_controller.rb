@@ -44,6 +44,6 @@ class UsersController < ApplicationController
   private
 
   def user_details
-    params.require(:user).permit(:school, :high_school, :college, :university, :profession, :profile_pic, :background_pic, :quote)
+    params.require(:user).permit(:school, :company, :country, :birthday, :occupation, :profile_pic, :background_pic, :quote)
   end
 end

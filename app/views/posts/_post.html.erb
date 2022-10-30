@@ -2,6 +2,8 @@
   <div class="post-title">
     <% if post.author.profile_pic.attached? %>
       <%= link_to image_tag(post.author.profile_pic), post.author %>
+    <% elsif !post.author.avatar.nil? %>
+      <%= link_to image_tag(post.author.avatar), post.author %>
     <% else %>
       <%= link_to image_tag('blank-profile-pic'), post.author %>
     <% end %>

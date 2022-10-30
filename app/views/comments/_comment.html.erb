@@ -2,6 +2,8 @@
   <div class="user-comment">
     <% if comment.author.profile_pic.attached? %>
       <%= link_to image_tag(comment.author.profile_pic, class: 'user-pfp'), comment.author, target: '_top' %>
+    <% elsif !comment.author.avatar.nil? %>
+      <%= link_to image_tag(comment.author.avatar, class: 'user-pfp'), comment.author %>
     <% else %>
       <%= link_to image_tag('blank-profile-pic', class: 'user-pfp'), comment.author, target: '_top' %>
     <% end %>

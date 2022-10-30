@@ -19,11 +19,10 @@ class User < ApplicationRecord
       where('sender_id != user_id')
     end
   end
-  # has_many :friendlies, foreign_key: :other_user_id, class_name: 'Friendship'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook]
 
   def send_friend_request(user)
     Friendship.create(user_id: id, other_user_id: user.id, status: 'pending', sender_id: id, identifier: "#{id}_to_#{user.id}")
@@ -55,5 +54,12 @@ class User < ApplicationRecord
   def remove_friend(user)
     friends.delete(user)
     user.friends.delete(self)
+  end
+
+  def self.from_omniauth(auth)
+    name_split = auth.info.name.split(" ")
+    user = User.where(email: auth.info.email).first
+    user ||= User.create!(provider: auth.provider, uid: auth.uid, last_name: name_split[1], first_name: name_split[0], email: auth.info.email, password: Devise.friendly_token[0, 20], avatar: auth.info.image)
+    user
   end
 end
