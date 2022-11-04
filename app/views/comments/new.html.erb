@@ -1,27 +1,37 @@
 <% if params[:parent_id] %>
   <%= turbo_frame_tag "new_reply_#{params[:parent_id]}" do %>
-    <%= form_with model: [@post, @post.comments.build], class: 'new-comment-box', data: {'controller': 'comments'} do |f|%>
+    <%= form_with model: [@post, @post.comments.build], class: 'new-comment-box', data: {'controller': 'comments edit'} do |f|%>
       <div class='new-comment-input'>
         <%= f.text_area :body, class: 'comment-input', rows: '1', data: {'post-target': 'textAreas', 'comments-target': 'textArea', 'action': 'keydown->comments#submit'}, placeholder: 'Write a comment' %>
       </div>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :parent_id, value: params[:parent_id] %>
+      <%= f.label :picture, class: 'buttonfile', for: "#{params[:parent_id]}_child_comment" do %>
+        <i class="fa-regular fa-image"></i>
+      <% end %>
+      <%= f.file_field :picture, class: 'inputfile', id: "#{params[:parent_id]}_child_comment", data: { action: 'edit#showPreviewComment' } %>
       <%= button_tag class: 'new-comment-button', data: {'action': 'comments#submitAndCleanup'} do %>
         <i class="fa-solid fa-paper-plane comment-send-icon"></i>
       <% end %>
+      <div class="image-container"><img src="" alt="" class="image-preview"></div>
     <% end %>
   <% end %>
 <% else %>
   <%= turbo_frame_tag "new_comment" do %>
-    <%= form_with model: [@post, @post.comments.build], class: 'new-comment-box', data: {'controller': 'comments'} do |f|%>
+    <%= form_with model: [@post, @post.comments.build], class: 'new-comment-box', data: {'controller': 'comments edit'} do |f|%>
       <div class='new-comment-input'>
         <%= f.text_area :body, class: 'comment-input', rows: '1', data: {'post-target': 'textAreas', 'comments-target': 'textArea', 'action': 'keydown->comments#submit'}, placeholder: 'Write a comment' %>
       </div>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :parent_id, value: params[:parent_id] %>
+      <%= f.label :picture, class: 'buttonfile', for: "#{@post.id}_comment" do %>
+        <i class="fa-regular fa-image"></i>
+      <% end %>
+      <%= f.file_field :picture, class: 'inputfile', id: "#{@post.id}_comment", data: { action: 'edit#showPreviewComment' } %>
       <%= button_tag class: 'new-comment-button', data: {'action': 'comments#submitAndCleanup'} do %>
         <i class="fa-solid fa-paper-plane comment-send-icon"></i>
       <% end %>
+      <div class="image-container"><img src="" alt="" class="image-preview"></div>
     <% end %>
   <% end %>
 <% end %>

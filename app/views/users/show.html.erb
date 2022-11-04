@@ -67,7 +67,7 @@
         <% end %>
       </p>
       <hr>
-      <p>Birthday: <%= @user.birthday.to_fs(:long_ordinal) %></p>
+      <p>Birthday: <%= @user.birthday.to_fs(:long_ordinal) unless @user.birthday.class == NilClass %></p>
       <p>School: <%= @user.school %></p>
       <p>Occupation: <%= @user.occupation %></p>
       <p>Currently working at: <%= @user.company %> </p>

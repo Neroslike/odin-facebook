@@ -26,8 +26,9 @@ export default class extends Controller {
 
   submitAndCleanup(e) {
     e.preventDefault()
-    //Use requestSubmit() here to send to allow the form to send as TURBO_STREAM
+    //Use requestSubmit() here to allow the form to send as TURBO_STREAM
     this.element.requestSubmit();
+    this.textAreaTarget.style.height = '20px'
     if (this.element.parentElement.className == 'reply-frame') {
       this.element.remove()
     } else {

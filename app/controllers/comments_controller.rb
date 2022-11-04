@@ -10,6 +10,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Post.find(params[:post_id]).comments.build(comment_params)
+    @comment.assign_identifier
 
     respond_to do |format|
       if @comment.save
@@ -23,6 +24,6 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body, :user_id, :parent_id)
+    params.require(:comment).permit(:body, :user_id, :picture, :parent_id)
   end
 end

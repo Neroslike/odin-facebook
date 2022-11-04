@@ -1,31 +1,52 @@
-<div class="comment" data-controller='comments'>
-  <div class="user-comment">
-    <% if comment.author.profile_pic.attached? %>
-      <%= link_to image_tag(comment.author.profile_pic, class: 'user-pfp'), comment.author, target: '_top' %>
-    <% elsif !comment.author.avatar.nil? %>
-      <%= link_to image_tag(comment.author.avatar, class: 'user-pfp'), comment.author %>
-    <% else %>
-      <%= link_to image_tag('blank-profile-pic', class: 'user-pfp'), comment.author, target: '_top' %>
+<% if comment.identifier > 4 %>
+  <div class="comment" data-controller='comments' style='margin-left: 0px;'>
+  <% else %>
+    <div class="comment" data-controller='comments'>
     <% end %>
-    <div class="comment-box">
-      <h4 class='comment-box-title'><%= link_to "#{comment.author.first_name} #{comment.author.last_name}", comment.author %></h4>
-      <p class='comment-box-body'><%= comment.body %></p>
-      <p class='comment-timestamp'><%= comment.created_at.localtime.to_fs(:standard) %></p>
-    </div>
-    <div class="comment-links">
-      <%= turbo_frame_tag comment, class: 'comment-links-frame' do %>
-        <% if current_user.likes.pluck(:comment_id).include?(comment.id) %>
-          <%= button_to 'Like', like_path(comment.likes.find_by(user_id: current_user.id)), method: :delete, class: 'like-active comment-like-button' %>
+    <div class="user-comment">
+      <div class="comment-user-pfp">
+        <% if comment.author.profile_pic.attached? %>
+          <%= link_to image_tag(comment.author.profile_pic, class: 'user-pfp'), comment.author, target: '_top' %>
+        <% elsif !comment.author.avatar.nil? %>
+          <%= link_to image_tag(comment.author.avatar, class: 'user-pfp'), comment.author %>
         <% else %>
-          <%= button_to 'Like', likes_path(like: {comment_id: comment.id, user_id: current_user.id}), data: {'turbo-method': :post}, class: 'comment-like-button' %>
+          <%= link_to image_tag('blank-profile-pic', class: 'user-pfp'), comment.author, target: '_top' %>
         <% end %>
-        <%= link_to 'Reply', new_post_comment_path(comment.post, parent_id: comment.id), data: {turbo_frame: "new_reply_#{comment.id}"} %>
+      </div>
+      <%= turbo_frame_tag comment, class: 'comment-links-frame' do %>
+        <div class="comment-box">
+          <h4 class='comment-box-title'><%= link_to "#{comment.author.first_name} #{comment.author.last_name}", comment.author %></h4>
+          <p class='comment-box-body'><%= comment.body %></p>
+          <% if comment.picture.attached? %>
+            <div class="comment-picture-container">
+              <%= image_tag(comment.picture, class: 'comment-picture') %>
+            </div>
+          <% end %>
+          <div class="comment-metrics">
+            <% unless comment.likes.empty? %>
+              <div class="like-container">
+              <%= link_to likes_path(comment_id: comment.id), data: { turbo_frame: 'modal', action: 'post#toggleBodyScrolling' }, class: 'comment-like-count' do %>
+                <i class="fa-solid fa-thumbs-up mini-like"></i>
+                <p><%= comment.likes.count %></p>
+              <% end %>
+              </div>
+            <% end %>
+            <p class='comment-timestamp'><%= comment.created_at.localtime.to_fs(:standard) %></p>
+          </div>
+        </div>
+        <div class="comment-links">
+          <% if current_user.likes.pluck(:comment_id).include?(comment.id) %>
+            <%= button_to 'Like', like_path(comment.likes.find_by(user_id: current_user.id)), method: :delete, class: 'like-active comment-like-button' %>
+          <% else %>
+            <%= button_to 'Like', likes_path(like: {comment_id: comment.id, user_id: current_user.id}), data: {'turbo-method': :post}, class: 'comment-like-button' %>
+          <% end %>
+          <%= link_to 'Reply', new_post_comment_path(comment.post, parent_id: comment.id), data: {turbo_frame: "new_reply_#{comment.id}"} %>
+        </div>
+      <% end %>
+      <%= turbo_frame_tag "new_reply_#{comment.id}", class: 'reply-frame', data: {action: 'turbo:frame-render->comments#focusReply'} do %>
       <% end %>
     </div>
-    <%= turbo_frame_tag "new_reply_#{comment.id}", class: 'reply-frame', data: {action: 'turbo:frame-render->comments#focusReply'} do %>
-    <% end %>
+    <div class='comment-replies' id='comment_<%= comment.id %>_replies'>
+      <%= render 'comments/post_comments', comments: comment.replies %>
+    </div>
   </div>
-  <div class='comment-replies' id='comment_<%= comment.id %>_replies'>
-    <%= render 'comments/post_comments', comments: comment.replies %>
-  </div>
-</div>

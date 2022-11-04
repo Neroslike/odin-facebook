@@ -11,7 +11,7 @@
     </div>
     <div class="edit-user-field">
       <%= f.label :country %>
-      <%= f.select :country, options_for_select(CS.countries.map { |key, value| [value] }) %>
+      <%= f.select :country, options_for_select(CS.countries.map { |key, value| [value] }, @user.country) %>
     </div>
     <div class="edit-user-field">
       <%= f.label :birthday %>
@@ -36,7 +36,7 @@
     </div>
     <div class="edit-user-field">
       <%= f.label :background_pic, 'Background Picture' %>
-      <%= f.file_field :background_pic, data: { action: 'edit#showPreviewBg' } %>
+      <%= f.file_field :background_pic, data: { action: 'edit#showPreview' } %>
       <% if @user.background_pic.attached? %>
         <%= image_tag @user.background_pic, class: 'edit-profile-pic', id: 'user-background-pic' %>
       <% else %>

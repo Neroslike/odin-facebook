@@ -10,7 +10,11 @@ class LikesController < ApplicationController
   end
 
   def index
-    @likes = Post.find(params[:post_id]).likes
+    if params[:post_id]
+      @likes = Post.find(params[:post_id]).likes
+    else
+      @likes = Comment.find(params[:comment_id]).likes
+    end
   end
 
   private

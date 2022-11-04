@@ -2,7 +2,11 @@
   <div class="likes-modal" data-post-target='modal' data-action='keydown@window->post#closeWithKeyboard click@window->post#closeBackground'>
     <div class="post-likes" data-post-target='likeModal'>
       <div class="like-show-header">
-        <h3>Who liked this post</h3>
+        <% if params[:post_id] %>
+          <h3>Who liked this post</h3>
+        <% else %>
+          <h3>Who liked this comment</h3>
+        <% end %>
         <%= link_to posts_path, data: { action: 'post#hideModal:prevent' } do %>
           <i class="fa-solid fa-xmark close-button"></i>
         <% end %>
