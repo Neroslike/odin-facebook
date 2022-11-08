@@ -28,6 +28,8 @@ export default class extends Controller {
     e.preventDefault()
     //Use requestSubmit() here to allow the form to send as TURBO_STREAM
     this.element.requestSubmit();
+    e.target.parentElement.parentElement.querySelector('.inputfile').value = ''
+    e.target.parentElement.parentElement.querySelector('.image-container').innerHTML = '<div class="image-container"><img src="" alt="" class="image-preview"></div>'
     this.textAreaTarget.style.height = '20px'
     if (this.element.parentElement.className == 'reply-frame') {
       this.element.remove()
@@ -39,6 +41,12 @@ export default class extends Controller {
   focusReply(e) {
     this.frame = e.target.getElementsByTagName('textarea')[0]
     this.frame.focus()
+  }
+
+  deleteFile(event) {
+    console.log(event)
+    event.target.parentElement.parentElement.parentElement.querySelector('.inputfile').value = ''
+    event.target.parentElement.parentElement.parentElement.querySelector('.image-container').innerHTML = '<div class="image-container"><img src="" alt="" class="image-preview"></div>'
   }
 }
 

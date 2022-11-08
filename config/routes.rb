@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post 'users/decline_friend_request', to: 'users#decline_friend_request', as: 'decline_friend_request'
   get 'users/:id/edit_user_profile', to: 'users#edit_user_profile', as: 'edit_user_profile'
   patch 'users/:id/update_user_profile', to: 'users#update_user_profile', as: 'update_user_profile'
+  get 'users/:id/friends', to: 'users#friends', as: 'friends'
+  get 'users/:id/posts', to: 'users#posts', as: 'user_posts'
   resources :likes, only: %i[create destroy index]
   resources :users
   root "posts#index"

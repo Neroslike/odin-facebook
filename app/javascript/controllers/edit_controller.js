@@ -2,6 +2,8 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="edit"
 export default class extends Controller {
+  static targets = ['files']
+
   showPreview(event) {
     if (event.target.files.length > 0) {
       var src = URL.createObjectURL(event.target.files[0]);
@@ -24,8 +26,30 @@ export default class extends Controller {
   }
 
   deleteFile(event) {
-    console.log(event.target)
     event.target.parentElement.parentElement.parentElement.querySelector('.inputfile').value = ''
     event.target.parentElement.parentElement.parentElement.querySelector('.image-container').innerHTML = '<div class="image-container"><img src="" alt="" class="image-preview"></div>'
+  }
+
+  showPreviewPost(event) {
+    if (event.target.files.length > 0) {
+      var preview = this.createPreviews(Array.from(event.target.files))
+      this.filesTarget.innerHTML += preview
+    }
+  }
+
+  createPreviews(files){
+    var preview = ''
+
+    files.forEach(file => {
+      var container = document.createElement('div')
+      container.classList.add('post-preview-container')
+      var src = URL.createObjectURL(file)
+      var imgTag = document.createElement('img')
+      imgTag.src = src
+      imgTag.style.display = 'block'
+      container.innerHTML += imgTag.outerHTML
+      preview += container.outerHTML
+    });
+    return preview
   }
 }

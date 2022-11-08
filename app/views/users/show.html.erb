@@ -15,8 +15,12 @@
         <h2><%= @user.first_name %> <%= @user.last_name %></h2>
         <p><%= @user.friends.count %> Friends</p>
         <div class='common-friends-pics'>
-          <% 8.times do %>
-            <%= image_tag 'test-profile' %>
+          <% @user.friends.limit(8).each do |friend| %>
+            <% unless friend.profile_pic.attached? %>
+              <%= link_to image_tag('blank-profile-pic'), friend %>
+            <% else %>
+              <%= link_to image_tag(friend.profile_pic), friend %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -41,20 +45,16 @@
             <% end %>
           <% end %>
         <% end %>
-        <% unless current_user == @user && !current_user.friend_of?(@user) %>
-          <button class='profile-message-button profile-button'><i class="fa-brands fa-facebook-messenger"></i> Message</button>
+        <%= link_to friends_path(@user), class: 'profile-friends-button profile-button', data: { turbo_frame: 'profile-content' } do %>
+          <i class="fa-solid fa-user-group"></i> Friends
         <% end %>
-        <button class='profile-friends-button profile-button'><i class="fa-solid fa-user-group"></i> Friends</button>
       <% end %>
     </div>
     <hr>
     <div class="profile-navbar">
       <ul>
-        <li><a href="">Posts</a></li>
-        <li><a href="">About</a></li>
-        <li><a href="">Friends</a></li>
-        <li><a href="">Pictures</a></li>
-        <li><a href="">Videos</a></li>
+        <li><%= link_to 'Posts', user_posts_path(@user), data: { turbo_frame: 'profile-content' } %></li>
+        <li><%= link_to 'Friends', friends_path(@user), data: { turbo_frame: 'profile-content' } %></li>
       </ul>
     </div>
   </div>
@@ -67,25 +67,22 @@
         <% end %>
       </p>
       <hr>
-      <p>Birthday: <%= @user.birthday.to_fs(:long_ordinal) unless @user.birthday.class == NilClass %></p>
-      <p>School: <%= @user.school %></p>
-      <p>Occupation: <%= @user.occupation %></p>
-      <p>Currently working at: <%= @user.company %> </p>
-      <p>Country: <%= @user.country %></p>
-    </div>
-    <div class="profile-content-comment">
-      <% if current_user.profile_pic.attached? %>
-        <%= image_tag current_user.profile_pic %>
-      <% else %>
-        <%= image_tag 'blank-profile-pic' %>
+      <% unless @user.birthday.class == NilClass %>
+        <p>Birthday: <%= @user.birthday.to_fs(:long_ordinal) %></p>
       <% end %>
-      <%= turbo_frame_tag 'new_comment', src: new_post_comment_path(Post.last) %>
+      <% unless @user.school == '' %>
+        <p>School: <%= @user.school %></p>
+      <% end %>
+      <% unless @user.occupation == '' %>
+        <p>Occupation: <%= @user.occupation %></p>
+      <% end %>
+      <% unless @user.company == '' %>
+        <p>Currently working at: <%= @user.company %> </p>
+      <% end %>
+      <% unless @user.country == '' %>
+        <p>Country: <%= @user.country %></p>
+      <% end %>
     </div>
-    <div class="profile-posts-identifier">
-      <h2>Posts</h2>
-    </div>
-    <div class="profile-posts">
-      <%= render @posts %>
-    </div>
+    <%= turbo_frame_tag 'profile-content', src: user_posts_path(@user) %>
   </div>
 </div>

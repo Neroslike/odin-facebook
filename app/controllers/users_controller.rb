@@ -41,6 +41,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def friends
+    @friends = User.find(params[:id]).friends
+  end
+
+  def posts
+    @posts = User.find(params[:id]).posts
+  end
+
   private
 
   def user_details

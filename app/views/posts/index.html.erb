@@ -1,6 +1,7 @@
 <%= turbo_frame_tag id="new_post", src:new_post_path, class: 'new-index-post' %>
 <div class="posts-grid" id='posts'>
   <%= render @posts %>
+  <%= render partial: "next_page" %>
 </div>
 <%= render 'components/friend_suggestions' %>
 <%= render 'components/friend_requests' %>

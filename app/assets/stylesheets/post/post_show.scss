@@ -62,6 +62,14 @@ $content-padding: 0 20px 0 20px;
     margin: 0;
     margin-left: 7px;
     color: rgb(167, 167, 167);
+
+    a {
+      color: rgb(167, 167, 167);
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
   a {
@@ -594,4 +602,27 @@ $content-padding: 0 20px 0 20px;
 
 .shared-post-picture {
   width: 100%;
+}
+
+.post-images-preview {
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.post-preview-container {
+  display: flex;
+  height: 200px;
+  width: 200px;
+  border: 1px solid gray;
+  padding: 5px;
+  margin-bottom: 15px;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
 }

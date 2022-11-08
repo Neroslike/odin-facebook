@@ -1,0 +1,13 @@
+<%= link_to user do %>
+  <div class="friend-container">
+    <% if user.profile_pic.attached? %>
+      <%= image_tag user.profile_pic, class: 'friend-pic' %>
+    <% elsif !user.avatar.nil?%>
+      <%= image_tag user.avatar, class: 'friend-pic' %>
+    <% else%>
+      <%= image_tag 'blank-profile-pic', class: 'friend-pic' %>
+    <% end %>
+    <p class='friend-names'><%= user.first_name %> <%= user.last_name %></p>
+    <p class='friend-country'><%= user.country %></p>
+  </div>
+<% end %>

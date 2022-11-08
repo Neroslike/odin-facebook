@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.build_feed(current_user).order(created_at: :desc)
+    @pagy, @posts = pagy_countless(Post.build_feed(current_user).order(created_at: :desc), items: 5)
+
+    render "scrollable_list" if params[:page]
     @like = Like.new
     @users = User.all
   end
