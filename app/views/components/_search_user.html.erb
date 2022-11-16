@@ -1,0 +1,7 @@
+<div class="search-users-form">
+  <%= form_with url: users_path, method: :get, data: {turbo_frame: 'users-index'}, class: 'search-form' do |f| %>
+    <%= f.text_field :query, class: 'search-box', placeholder: 'Search users...' %>
+    <%= f.submit 'Search' %>
+  <% end %>
+  <%= turbo_frame_tag 'users-index' %>
+</div>

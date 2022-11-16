@@ -90,3 +90,9 @@ gem "omniauth-facebook", "~> 9.0"
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 
 gem "city-state", "~> 0.1.0"
+
+gem "sunspot_rails", "~> 2.6"
+
+gem "sunspot_solr", "~> 2.6"
+
+gem "letter_opener", group: :development

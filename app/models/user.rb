@@ -1,10 +1,23 @@
 class User < ApplicationRecord
+  after_create :send_welcome_email
+
+  def send_welcome_email
+    UserMailer.with(user: self).welcome_email.deliver_now
+  end
+
+  validates :first_name, presence: true, length: { minimum: 2 }
+  validates :last_name, presence: true, length: { minimum: 2 }
+  validates :email, presence: true, uniqueness: true
+
   has_many :likes, class_name: 'Like', foreign_key: 'user_id'
   has_many :posts
   has_many :comments
   has_one_attached :profile_pic
   has_one_attached :background_pic
   has_many_attached :pictures
+
+  #Scopes
+  scope :search, ->(value) { where('first_name ILIKE ? OR last_name ILIKE ?', '%' + User.sanitize_sql_like(value) + '%', '%' + User.sanitize_sql_like(value) + '%') }
 
   # Self referencing friendship system
   has_many :friendship_list, -> { confirmed }, foreign_key: :user_id, class_name: 'Friendship'

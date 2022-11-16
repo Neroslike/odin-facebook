@@ -1,6 +1,6 @@
 .friends-container {
   display: grid;
-  grid-template-columns: repeat(3, max-content);
+  grid-template-columns: repeat(auto-fill, clamp(180px, 200px, 300px));
   gap: 10px;
   justify-content: space-around;
   background-color: #242526;
@@ -19,8 +19,10 @@
 .friend-container {
   display: grid;  
   column-gap: 6px;
+  grid-template-columns: min-content 1fr;
   grid-template-rows: 1fr 1fr;
   border-radius: 10px;
+  column-gap: 8px;
   padding: 10px;
 }
 

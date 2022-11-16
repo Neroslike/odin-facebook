@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.search(params[:query])
+  end
+
   def show
     @user = User.find(params[:id])
     @posts = @user.posts.order(created_at: :desc)
@@ -53,5 +57,9 @@ class UsersController < ApplicationController
 
   def user_details
     params.require(:user).permit(:school, :company, :country, :birthday, :occupation, :profile_pic, :background_pic, :quote)
+  end
+
+  def user_search
+    params.permit(:query, :commit)
   end
 end

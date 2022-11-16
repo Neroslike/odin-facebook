@@ -1,0 +1,11 @@
+<%= turbo_frame_tag 'users-index' do  %>
+  <% if @users.empty? %>
+    <p>No users found</p>
+  <% else %>
+    <div class="friends-container">
+      <% @users.each do |user| %>
+        <%= render user %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

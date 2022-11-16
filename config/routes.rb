@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   patch 'users/:id/update_user_profile', to: 'users#update_user_profile', as: 'update_user_profile'
   get 'users/:id/friends', to: 'users#friends', as: 'friends'
   get 'users/:id/posts', to: 'users#posts', as: 'user_posts'
+  get 'users/index', to: 'users#index', as: 'users'
   resources :likes, only: %i[create destroy index]
   resources :users
   root "posts#index"
